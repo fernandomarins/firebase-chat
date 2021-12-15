@@ -6,5 +6,6 @@ target 'firebase-chat' do
   use_frameworks!
 
   # Pods for firebase-chat
+  pod 'Firebase'
 
 end

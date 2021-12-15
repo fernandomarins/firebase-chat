@@ -20,6 +20,10 @@
 		5584FA502769EE1E00DB546E /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584FA4F2769EE1E00DB546E /* NewConversationViewController.swift */; };
 		5584FA522769EE3400DB546E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5584FA512769EE3400DB546E /* ProfileViewController.swift */; };
 		55E6AD5B2769FFEE0040BD7F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6AD5A2769FFEE0040BD7F /* Extensions.swift */; };
+		55E6AD5D276A4F010040BD7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55E6AD5C276A4F000040BD7F /* GoogleService-Info.plist */; };
+		55E6AD60276A502B0040BD7F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 55E6AD5F276A502B0040BD7F /* FirebaseAnalytics */; };
+		55E6AD62276A502B0040BD7F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 55E6AD61276A502B0040BD7F /* FirebaseAuth */; };
+		55E6AD64276A502B0040BD7F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 55E6AD63276A502B0040BD7F /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,7 @@
 		5584FA4F2769EE1E00DB546E /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		5584FA512769EE3400DB546E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		55E6AD5A2769FFEE0040BD7F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		55E6AD5C276A4F000040BD7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E6AD60276A502B0040BD7F /* FirebaseAnalytics in Frameworks */,
+				55E6AD62276A502B0040BD7F /* FirebaseAuth in Frameworks */,
+				55E6AD64276A502B0040BD7F /* FirebaseDatabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +78,7 @@
 		5584FA2C2769EBEA00DB546E /* firebase-chat */ = {
 			isa = PBXGroup;
 			children = (
+				55E6AD5C276A4F000040BD7F /* GoogleService-Info.plist */,
 				5584FA452769ED8400DB546E /* Models */,
 				5584FA462769ED8C00DB546E /* Views */,
 				5584FA442769ED7B00DB546E /* ViewModels */,
@@ -160,6 +169,11 @@
 			dependencies = (
 			);
 			name = "firebase-chat";
+			packageProductDependencies = (
+				55E6AD5F276A502B0040BD7F /* FirebaseAnalytics */,
+				55E6AD61276A502B0040BD7F /* FirebaseAuth */,
+				55E6AD63276A502B0040BD7F /* FirebaseDatabase */,
+			);
 			productName = "firebase-chat";
 			productReference = 5584FA2A2769EBEA00DB546E /* firebase-chat.app */;
 			productType = "com.apple.product-type.application";
@@ -188,6 +202,9 @@
 				Base,
 			);
 			mainGroup = 5584FA212769EBEA00DB546E;
+			packageReferences = (
+				55E6AD5E276A502B0040BD7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */,
+			);
 			productRefGroup = 5584FA2B2769EBEA00DB546E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -203,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5584FA3A2769EBEB00DB546E /* LaunchScreen.storyboard in Resources */,
+				55E6AD5D276A4F010040BD7F /* GoogleService-Info.plist in Resources */,
 				5584FA372769EBEB00DB546E /* Assets.xcassets in Resources */,
 				5584FA352769EBEA00DB546E /* Main.storyboard in Resources */,
 			);
@@ -376,9 +394,12 @@
 				DEVELOPMENT_TEAM = C8ULV38G2Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "firebase-chat/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app would like to access the camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app would like to access the album photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -404,9 +425,12 @@
 				DEVELOPMENT_TEAM = C8ULV38G2Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "firebase-chat/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app would like to access the camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app would like to access the album photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -444,6 +468,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		55E6AD5E276A502B0040BD7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		55E6AD5F276A502B0040BD7F /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55E6AD5E276A502B0040BD7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			productName = FirebaseAnalytics;
+		};
+		55E6AD61276A502B0040BD7F /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55E6AD5E276A502B0040BD7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			productName = FirebaseAuth;
+		};
+		55E6AD63276A502B0040BD7F /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55E6AD5E276A502B0040BD7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5584FA222769EBEA00DB546E /* Project object */;
 }
