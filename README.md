@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is chat app using Firebase as database.
+This is a chat app using Firebase. You can send your location, photos and videos.
 
 ## Skills Learned
 
