@@ -18,7 +18,7 @@ class RegisterViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person")
+        imageView.image = UIImage(systemName: "person.circle")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
@@ -35,7 +35,11 @@ class RegisterViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "First Name..."
+        field.attributedPlaceholder = NSAttributedString(
+            string: "First name",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
+        field.textColor = .black
         
         // adding some padding to the text field
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -56,7 +60,11 @@ class RegisterViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "Last Name..."
+        field.attributedPlaceholder = NSAttributedString(
+            string: "Last name",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
+        field.textColor = .black
         
         // adding some padding to the text field
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -77,7 +85,11 @@ class RegisterViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "Email Address..."
+        field.attributedPlaceholder = NSAttributedString(
+            string: "Email address",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
+        field.textColor = .black
         
         // adding some padding to the text field
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -98,7 +110,11 @@ class RegisterViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "Password..."
+        field.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
+        field.textColor = .black
         
         // adding some padding to the text field
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -193,20 +209,34 @@ class RegisterViewController: UIViewController {
                   return
               }
         
-        Firebase.Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            guard let result = result, error == nil  else {
-                print("error creating user")
+        DatabaseManager.shared.userExists(with: email) { [weak self] exists in
+            guard !exists else {
+                let alert = self?.showAlert("ERROR", "Usuário já existe", .alert)
+                alert!.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert!, animated: true, completion: nil)
+                // user already exists
                 return
             }
             
-            let user = result.user
-            print(user)
-            self.showAlert(title: "YES!", message: "The user was created successfully", titleAction: "OK")
+            Firebase.Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                guard result != nil, error == nil  else {
+                    print("error creating user")
+                    return
+                }
+                
+                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email))
+                
+                self?.navigationController?.dismiss(animated: true, completion: nil)
+            }
         }
+        
+        
     }
     
     func alertLoginError() {
-        showAlert(title: "Woops", message: "Please enter all information to create a new account", titleAction: "Dismiss")
+        let alert = showAlert("Woops", "Please enter all information to create a new account", .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func didTapRegister() {

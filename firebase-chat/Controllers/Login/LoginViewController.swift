@@ -31,7 +31,10 @@ class LoginViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "Email Address..."
+        field.attributedPlaceholder = NSAttributedString(
+            string: "Email Address...",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
         
         // adding some padding to the text field
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -52,7 +55,11 @@ class LoginViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "Password..."
+        // Changing the placeholder color
+        field.attributedPlaceholder = NSAttributedString(
+            string: "Password...",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
         
         // adding some padding to the text field
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -124,7 +131,7 @@ class LoginViewController: UIViewController {
               }
         
         // Firebase log in
-        Firebase.Auth.auth().signIn(withEmail: email, password: password) { result, error in
+        Firebase.Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             guard let result = result, error == nil else {
                 print("failed to log in user : \(email)")
                 return
@@ -132,11 +139,14 @@ class LoginViewController: UIViewController {
             
             let user = result.user
             print("Logged in: \(user)")
+            self?.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
     func alertLoginError() {
-        showAlert(title: "Woops", message: "Please enter all information to log in", titleAction: "Dismiss")
+        let alert = showAlert("Woops", "Please enter all information to log in", .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func didTapRegister() {
